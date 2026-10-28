@@ -1,12 +1,17 @@
 package com.svi.warcardgame;
 
 import com.svi.warcardgame.enums.*;
+import com.svi.warcardgame.models.Deck;
 
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println(Suits.fromSymbol("D"));              // DIAMOND
-        System.out.println(Ranks.fromSymbol("10").getValue());  // 10
-        System.out.println(Ranks.fromSymbol("X"));
+        Deck deck = new Deck();
+
+        if(deck.loadFromFile("input.txt")){
+            deck.displayDeck("Original Deck");
+        }else {
+            System.out.println("Failed to load Deck");
+        }
     }
 }

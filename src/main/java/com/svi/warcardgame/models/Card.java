@@ -18,20 +18,19 @@ public class Card {
 
     public static int compareCard(Card a, Card b){
 
-        if (a.getRank().getValue() > b.getRank().getValue()){
-            return 1;
-        }
-        else if (a.getRank().getValue() < b.getRank().getValue()){
-            return -1;
+        int rankComparison = Integer.compare(
+                a.getRank().getValue(),
+                b.getRank().getValue());
+
+
+        if (rankComparison != 0){
+            return rankComparison;
         }
 
-        if (a.getSuit().getValue() > b.getSuit().getValue()){
-            return 1;
-        }
-        else if(a.getSuit().getValue() < b.getSuit().getValue()){
-            return -1;
-        }
-        return 0;
+        return Integer.compare(
+                a.getSuit().getValue(),
+                b.getSuit().getValue()
+        );
     }
 
     @Override

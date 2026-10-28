@@ -1,10 +1,10 @@
 package com.svi.warcardgame.enums;
 
 public enum Suits {
-    CLUBS('C', 1),
-    SPADE('S', 2),
+    DIAMOND('D', 4),
     HEART('H', 3),
-    DIAMOND('D', 4);
+    SPADE('S', 2),
+    CLUBS('C', 1);
 
     private final char symbol;
     private final int value;
@@ -20,8 +20,8 @@ public enum Suits {
 
 
     public static Suits fromSymbol(String text) {
-        if (text == null || text.length() != 1) {
-            return null;
+        if(text == null){
+            throw new IllegalArgumentException("Suit symbol cannot be null");
         }
         for (Suits suit : values()) {
             if (suit.symbol == text.charAt(0)){
@@ -29,6 +29,6 @@ public enum Suits {
 
             }
         }
-        return null;
+        throw new IllegalArgumentException("Invalid suit symbol: " + text);
     }
 }
