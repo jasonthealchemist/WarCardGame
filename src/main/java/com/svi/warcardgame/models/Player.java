@@ -44,4 +44,29 @@ public class Player {
         return null;
     }
 
+    public void collectCards(List<Card> playedCards, Card winningCard){
+        addToBottom(winningCard);
+
+        for(Card card : playedCards){
+            if (card != winningCard){
+                addToBottom(card);
+            }
+        }
+    }
+
+    public void displayDeck() {
+        int cardNumber = 1;
+
+        for (Card card : cards) {
+            System.out.print(card + " ");
+
+            if (cardNumber % 13 == 0) {
+                System.out.println();
+            }
+
+            cardNumber++;
+        }
+
+        System.out.println();
+    }
 }

@@ -1,7 +1,8 @@
 package com.svi.warcardgame;
 
-import com.svi.warcardgame.enums.*;
+import com.svi.warcardgame.game.GameUtils;
 import com.svi.warcardgame.models.Deck;
+import com.svi.warcardgame.models.Player;
 
 public class Main {
 

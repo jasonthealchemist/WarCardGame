@@ -1,3 +1,4 @@
+
 package com.svi.warcardgame.game;
 
 import com.svi.warcardgame.models.Card;
@@ -9,22 +10,28 @@ import java.util.List;
 
 public class GameUtils {
 
-    public Player playGame(List<Player> players, int totalCards){
+    public Player playGame(List<Player> players, int totalCards) {
         List<Player> activePlayers = new ArrayList<>();
 
-        for (Player player : players){
-            activePlayers.add(player);
+        // Include only players who have cards.
+        for (Player player : players) {
+            if (player.hasCards()) {
+                activePlayers.add(player);
+            }
         }
+
         int roundNumber = 1;
 
-        while(activePlayers.size() > 1){
+        while (activePlayers.size() > 1) {
             System.out.println("\n========== ROUND "
                     + roundNumber + " ==========");
 
-            List <Card> tableCards = new ArrayList<>();
-            List <Player> playersInRound = new ArrayList<>();
+            List<Card> tableCards = new ArrayList<>();
+            List<Player> playersInRound = new ArrayList<>();
 
             playRound(activePlayers, playersInRound, tableCards);
+
+            Card winningCard = findWinningCard(tableCards);
             Player roundWinner = findRoundWinner(
                     playersInRound, tableCards, winningCard
             );
@@ -35,8 +42,7 @@ public class GameUtils {
 
             displayCollectedCards(tableCards, winningCard);
 
-            roundWinner.collecCards(tableCards, winningCard);
-
+            roundWinner.collectCards(tableCards, winningCard);
 
             removeEliminatedPlayers(activePlayers);
 
@@ -46,20 +52,23 @@ public class GameUtils {
 
             roundWinner.displayDeck();
 
-            System.out.println("/nActive Players Remaining: " + activePlayers.size());
+            System.out.println("\nActive players remaining: "
+                    + activePlayers.size());
 
-            if(roundWinner.hasAllCards(totalCards)){
+            if (roundWinner.hasAllCards(totalCards)) {
                 System.out.println("\n========== GAME OVER ==========");
                 System.out.println("Player "
                         + roundWinner.getPlayerNo()
                         + " wins the game!");
 
                 return roundWinner;
-
             }
-            roundNumber ++;
+
+            roundNumber++;
         }
-        if(activePlayers.size() == 1){
+
+        // Return the last remaining player, if there is one.
+        if (activePlayers.size() == 1) {
             return activePlayers.get(0);
         }
 
@@ -68,10 +77,10 @@ public class GameUtils {
 
     private void playRound(
             List<Player> activePlayers,
-            List <Player> playersInRound,
-            List<Card> tableCards
-    ){
-        for (Player player : activePlayers){
+            List<Player> playersInRound,
+            List<Card> tableCards) {
+
+        for (Player player : activePlayers) {
             Card playedCard = player.playTopCard();
 
             playersInRound.add(player);
@@ -79,13 +88,13 @@ public class GameUtils {
         }
     }
 
-    private Card findWinningCard(List<Card> tableCards){
+    private Card findWinningCard(List<Card> tableCards) {
         Card winningCard = tableCards.get(0);
 
-        for(int i = 1; i < tableCards.size(); i++){
-            Card currentCard = tableCards.get(i);
+        for (int index = 1; index < tableCards.size(); index++) {
+            Card currentCard = tableCards.get(index);
 
-            if (Card.compareCard(currentCard, winningCard) > 0){
+            if (Card.compareCard(currentCard, winningCard) > 0) {
                 winningCard = currentCard;
             }
         }
@@ -96,11 +105,72 @@ public class GameUtils {
     private Player findRoundWinner(
             List<Player> playersInRound,
             List<Card> tableCards,
-            Card winningCard
-    ){
-        for(int i = 0; i < tableCards.size(); i++){
+            Card winningCard) {
 
+        for (int index = 0; index < tableCards.size(); index++) {
+            if (tableCards.get(index) == winningCard) {
+                return playersInRound.get(index);
+            }
+        }
+
+        return null;
+    }
+
+    private void displayRoundResults(
+            List<Player> playersInRound,
+            List<Card> tableCards,
+            Player roundWinner,
+            Card winningCard) {
+
+        System.out.println("\nCards played:");
+
+        for (int index = 0; index < tableCards.size(); index++) {
+            Player player = playersInRound.get(index);
+            Card playedCard = tableCards.get(index);
+
+            if (playedCard == winningCard) {
+                System.out.println(">>> WINNER: Player "
+                        + player.getPlayerNo()
+                        + " - " + playedCard + " <<<");
+            } else {
+                System.out.println("Player "
+                        + player.getPlayerNo()
+                        + " - " + playedCard);
+            }
+        }
+
+        System.out.println("\nRound winner: Player "
+                + roundWinner.getPlayerNo());
+    }
+
+    private void displayCollectedCards(
+            List<Card> tableCards,
+            Card winningCard) {
+
+        System.out.println("\nCards collected (in order):");
+        System.out.println("1. Winning card: " + winningCard);
+
+        int cardNumber = 2;
+
+        for (Card card : tableCards) {
+            if (card != winningCard) {
+                System.out.println(cardNumber + ". " + card);
+                cardNumber++;
+            }
         }
     }
 
+    private void removeEliminatedPlayers(List<Player> activePlayers) {
+        for (int index = activePlayers.size() - 1; index >= 0; index--) {
+            Player player = activePlayers.get(index);
+
+            if (!player.hasCards()) {
+                System.out.println("Player "
+                        + player.getPlayerNo()
+                        + " has no cards left and is eliminated.");
+
+                activePlayers.remove(index);
+            }
+        }
+    }
 }
