@@ -3,17 +3,16 @@ package com.svi.warcardgame.game;
 
 import com.svi.warcardgame.models.Card;
 import com.svi.warcardgame.models.Player;
-import com.svi.warcardgame.models.Deck;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameUtils {
+public class WarCardGame {
 
     public Player playGame(List<Player> players, int totalCards) {
         List<Player> activePlayers = new ArrayList<>();
 
-        // Include only players who have cards.
+
         for (Player player : players) {
             if (player.hasCards()) {
                 activePlayers.add(player);

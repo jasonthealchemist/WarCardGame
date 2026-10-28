@@ -1,18 +1,23 @@
+
 package com.svi.warcardgame;
 
-import com.svi.warcardgame.game.GameUtils;
+import com.svi.warcardgame.game.GameSetup;
+import com.svi.warcardgame.game.WarCardGame;
 import com.svi.warcardgame.models.Deck;
 import com.svi.warcardgame.models.Player;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        Deck deck = new Deck();
+        Scanner scanner = new Scanner(System.in);
 
-        if(deck.loadFromFile("input.txt")){
-            deck.displayDeck("Original Deck");
-        }else {
-            System.out.println("Failed to load Deck");
-        }
+        GameSetup gameSetup = new GameSetup(scanner);
+        gameSetup.start();
+
+        scanner.close();
     }
 }

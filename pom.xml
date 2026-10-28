@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.svi</groupId>
-    <artifactId>war-card-game</artifactId>
+    <artifactId>war-card-warCardGame</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
