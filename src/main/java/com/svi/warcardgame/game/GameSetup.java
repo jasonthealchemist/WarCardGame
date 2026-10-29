@@ -61,14 +61,12 @@ public class GameSetup {
 
 
     public void start(){
-        displayTitle();
+
+        if (!pressEnterToPlay()){
+            return;
+        }
 
         while(true){
-
-            if (!pressEnterToPlay()){
-                return;
-            }
-
             boolean gameStarted = startNewGame();
 
             if(!gameStarted){
@@ -79,13 +77,9 @@ public class GameSetup {
                 System.out.println("Thank you for playing!");
                 return;
             }
-            displayTitle();
+
 
         }
-    }
-
-    private void displayTitle(){
-        System.out.println("========== WAR CARD GAME ==========");
     }
 
     private boolean startNewGame(){
@@ -192,8 +186,6 @@ public class GameSetup {
             System.out.println(
                     "Error: Please enter Y/YES or N/NO."
             );
-
-
         }
     }
 }

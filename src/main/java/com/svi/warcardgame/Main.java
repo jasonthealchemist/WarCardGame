@@ -15,9 +15,21 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        GameSetup gameSetup = new GameSetup(scanner);
-        gameSetup.start();
+        displayTitle();
 
-        scanner.close();
+
+        try {
+            GameSetup gameSetup = new GameSetup(scanner);
+            gameSetup.start();
+
+            scanner.close();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+        private static void displayTitle(){
+            System.out.println("========== WAR CARD GAME ==========");
+            System.out.println(" ");
     }
 }
