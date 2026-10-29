@@ -19,36 +19,68 @@ public class GameSetup {
         this.scanner = scanner;
     }
 
-    public void pressEnterToPlay(){
+    public boolean pressEnterToPlay(){
         while(true){
-            System.out.print("Press Enter to play: ");
-            String input = scanner.nextLine();
+            System.out.print("Press Enter to Start | Q to Quit: ");
+            String input = scanner.nextLine().trim();
 
             if(input.isEmpty()){
                 System.out.println("Game Starting....");
-                return;
+                return true;
             }
 
-            System.out.println("Invalid, Please press Enter");
+            if(input.equalsIgnoreCase("Q") ||  input.equalsIgnoreCase("QUIT")){
+                if(confirmQuit()){
+                    System.out.println("Exiting War Card Game.....");
+                    return false;
+                }
+            }else {
+                System.out.println("Invalid, Please press Enter");
+            }
         }
     }
 
+    public boolean confirmQuit(){
+        while(true){
+            System.out.print("Are you sure you want to quit? (Y/N): ");
+            String answer = scanner.nextLine().trim();
+
+
+            if(answer.equalsIgnoreCase("Y") ||  answer.equalsIgnoreCase("YES")){
+                return true;
+            }
+
+            if(answer.equalsIgnoreCase("N") ||  answer.equalsIgnoreCase("NO")){
+                return false;
+            }
+
+            System.out.println("Invalid, Please enter Y or N");
+
+        }
+    }
+
+
     public void start(){
         displayTitle();
-        pressEnterToPlay();
 
         while(true){
+
+            if (!pressEnterToPlay()){
+                return;
+            }
+
             boolean gameStarted = startNewGame();
 
-            if (!gameStarted){
-                break;
+            if(!gameStarted){
+                return;
             }
 
             if(!askToPlayAgain()){
-                break;
+                System.out.println("Thank you for playing!");
+                return;
             }
             displayTitle();
-            pressEnterToPlay();
+
         }
     }
 
@@ -62,7 +94,6 @@ public class GameSetup {
         System.out.println("Loading deck from file...");
 
         if (!deck.loadFromFile("input.txt")){
-            System.out.println("Invalid file, unable to start the game");
             System.out.println("Check the file and try again");
             return false;
         }
@@ -89,6 +120,7 @@ public class GameSetup {
 
         if(winner != null){
             System.out.println("Game Winner: Player " + winner.getPlayerNo());
+            System.out.println(" ");
         }
         return true;
     }
@@ -124,7 +156,6 @@ public class GameSetup {
         return players;
     }
 
-
     private int getshuffleDeck(){
         while(true){
             System.out.print("Enter number of shuffles: ");
@@ -146,9 +177,10 @@ public class GameSetup {
             }
         }
     }
+
     private boolean askToPlayAgain(){
         while(true){
-            System.out.println("Would you like to play again? (Y/N): ");
+            System.out.print("Would you like to play again? (Y/N): ");
             String answer = scanner.nextLine().trim();
 
             if (answer.equalsIgnoreCase("Y") || answer.equalsIgnoreCase("YES")){
@@ -160,6 +192,7 @@ public class GameSetup {
             System.out.println(
                     "Error: Please enter Y/YES or N/NO."
             );
+
 
         }
     }
