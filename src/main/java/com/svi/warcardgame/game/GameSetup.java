@@ -19,11 +19,24 @@ public class GameSetup {
         this.scanner = scanner;
     }
 
+    public void pressEnterToPlay(){
+        while(true){
+            System.out.print("Press Enter to play: ");
+            String input = scanner.nextLine();
+
+            if(input.isEmpty()){
+                System.out.println("Game Starting....");
+                return;
+            }
+
+            System.out.println("Invalid, Please press Enter");
+        }
+    }
+
     public void start(){
         displayTitle();
+        pressEnterToPlay();
 
-        System.out.print("Press Enter to start the game: ");
-        scanner.nextLine();
         while(true){
             boolean gameStarted = startNewGame();
 
@@ -35,9 +48,7 @@ public class GameSetup {
                 break;
             }
             displayTitle();
-
-            System.out.print("Press Enter to start a new game: ");
-            scanner.nextLine();
+            pressEnterToPlay();
         }
     }
 
@@ -57,6 +68,7 @@ public class GameSetup {
         }
 
         System.out.println("Deck loaded successfully!");
+        System.out.println(" ");
 
         int numberOfPlayers = getNumberOfPlayers();
         int shuffleDeck = getshuffleDeck();
