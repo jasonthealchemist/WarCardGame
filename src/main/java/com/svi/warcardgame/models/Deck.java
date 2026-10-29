@@ -100,9 +100,9 @@ public class Deck {
 
         List<Card> shuffledCards = new ArrayList<>();
 
-        for (int index = 0; index < middle; index++){
-            shuffledCards.add(firstHalf.get(index));
-            shuffledCards.add(secondHalf.get(index));
+        for (int i = 0; i < middle; i++){
+            shuffledCards.add(firstHalf.get(i));
+            shuffledCards.add(secondHalf.get(i));
         }
 
         cards.clear();

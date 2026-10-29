@@ -146,8 +146,8 @@ public class WarCardGame {
             List<Card> tableCards,
             Card winningCard) {
 
-        System.out.println("\nCards collected (in order):");
-        System.out.println("1. Winning card: " + winningCard);
+        System.out.println("\nCards collected:");
+        System.out.println("Winning card: " + winningCard);
 
         int cardNumber = 2;
 

@@ -20,6 +20,10 @@ public class GameSetup {
     }
 
     public void start(){
+        displayTitle();
+
+        System.out.print("Press Enter to start the game: ");
+        scanner.nextLine();
         while(true){
             boolean gameStarted = startNewGame();
 
@@ -30,22 +34,33 @@ public class GameSetup {
             if(!askToPlayAgain()){
                 break;
             }
+            displayTitle();
+
+            System.out.print("Press Enter to start a new game: ");
+            scanner.nextLine();
         }
         System.out.println("\nThank you for playing!");
     }
 
-    private boolean startNewGame(){
+    private void displayTitle(){
         System.out.println("========== WAR CARD GAME ==========");
+    }
 
-        int numberOfPlayers = getNumberOfPlayers();
-        int shuffleDeck = getshuffleDeck();
-
+    private boolean startNewGame(){
         Deck deck = new Deck();
+
+        System.out.println("Loading deck from file...");
 
         if (!deck.loadFromFile("input.txt")){
             System.out.println("Invalid file, unable to start the game");
+            System.out.println("Check the file and try again");
             return false;
         }
+
+        System.out.println("Deck loaded successfully!");
+
+        int numberOfPlayers = getNumberOfPlayers();
+        int shuffleDeck = getshuffleDeck();
 
         deck.displayDeck("Original Deck");
 

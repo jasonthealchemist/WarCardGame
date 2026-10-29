@@ -19,9 +19,9 @@ public class Player {
         return playerNo;
     }
 
-    public int getCardCount(){
+    /*public int getCardCount(){
         return cards.size();
-    }
+    } */
 
     public boolean hasCards(){
         return !cards.isEmpty();
