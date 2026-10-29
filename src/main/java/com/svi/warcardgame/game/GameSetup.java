@@ -39,7 +39,6 @@ public class GameSetup {
             System.out.print("Press Enter to start a new game: ");
             scanner.nextLine();
         }
-        System.out.println("\nThank you for playing!");
     }
 
     private void displayTitle(){
@@ -137,7 +136,7 @@ public class GameSetup {
     }
     private boolean askToPlayAgain(){
         while(true){
-            System.out.print("Would you like to play again? (Y/N): ");
+            System.out.println("Would you like to play again? (Y/N): ");
             String answer = scanner.nextLine().trim();
 
             if (answer.equalsIgnoreCase("Y") || answer.equalsIgnoreCase("YES")){
