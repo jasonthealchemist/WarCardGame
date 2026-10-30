@@ -17,7 +17,6 @@ public class Main {
 
         displayTitle();
 
-
         try {
             GameSetup gameSetup = new GameSetup(scanner);
             gameSetup.start();

@@ -31,4 +31,21 @@ public enum Suits {
         }
         throw new IllegalArgumentException("Invalid suit symbol: " + text);
     }
+
+    public String getDisplaySymbol(){
+        switch (this) {
+            case DIAMOND:
+                return "♦";
+            case HEART:
+                return "♥";
+            case SPADE:
+                return "♠";
+            case CLUBS:
+                return "♣";
+            default:
+                return "";
+        }
+
+    }
 }
+

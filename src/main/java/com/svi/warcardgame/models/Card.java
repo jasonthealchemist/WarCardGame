@@ -35,6 +35,10 @@ public class Card {
 
     @Override
     public String toString() {
-        return suit.getSymbol() + "-"  + rank.getSymbol();
+        return  rank.getSymbol() + "-" + suit.getSymbol();
+    }
+
+    public String toDisplayString(){
+        return rank.getSymbol() + "-" + suit.getDisplaySymbol();
     }
 }

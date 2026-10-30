@@ -11,6 +11,11 @@ public class GameSetup {
     private static final int MIN_PLAYERS = 2;
     private static final int MAX_PLAYERS = 8;
     private static final int TOTAL_CARDS = 52;
+    private static final String RESET = "\u001B[0m";
+    private static final String RED = "\u001B[31m";
+    private static final String GOLD = "\u001B[33m";
+    private static final String CYAN = "\u001B[36m";
+    private static final String GREEN = "\u001B[32m";
 
     private final Scanner scanner;
 
@@ -113,7 +118,7 @@ public class GameSetup {
         Player winner = game.playGame(players, TOTAL_CARDS);
 
         if(winner != null){
-            System.out.println("Game Winner: Player " + winner.getPlayerNo());
+            System.out.println(GOLD + "★ Game Winner: Player " + winner.getPlayerNo() + " ★"+ RESET);
             System.out.println(" ");
         }
         return true;

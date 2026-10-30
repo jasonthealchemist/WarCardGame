@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WarCardGame {
+    private static final String RESET = "\u001B[0m";
+    private static final String RED = "\u001B[31m";
+    private static final String GOLD = "\u001B[33m";
+    private static final String CYAN = "\u001B[36m";
+    private static final String GREEN = "\u001B[32m";
 
     public Player playGame(List<Player> players, int totalCards) {
         List<Player> activePlayers = new ArrayList<>();
@@ -129,13 +134,14 @@ public class WarCardGame {
             Card playedCard = tableCards.get(index);
 
             if (playedCard == winningCard) {
-                System.out.println(">>> WINNER: Player "
+                System.out.println(GOLD + "★ WINNER: Player "
                         + player.getPlayerNo()
-                        + " - " + playedCard + " <<<");
+                        + ": " + playedCard.toDisplayString()
+                        + " ★" + RESET);
             } else {
                 System.out.println("Player "
                         + player.getPlayerNo()
-                        + " - " + playedCard);
+                        + ": " + playedCard.toDisplayString());
             }
         }
 
