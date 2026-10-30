@@ -115,7 +115,7 @@ public class Deck {
             return;
         }
 
-        for (int count = 0; count < shuffleCount; count++){
+        for (int count = 0; count < shuffleCount % 8; count++){
                 shuffle();
         }
     }
