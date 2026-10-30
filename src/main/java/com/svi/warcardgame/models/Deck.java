@@ -6,6 +6,7 @@ import com.svi.warcardgame.enums.Suits;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class Deck {
@@ -15,11 +16,16 @@ public class Deck {
         List<Card> loadedCards = new ArrayList<>();
         Set<String> uniqueCards = new HashSet<>();
 
-        try (BufferedReader reader = new BufferedReader(
-                new FileReader("WarCardGame/src/main/resources/" + fileName))) {
+
+        // Read the file using BufferedReader to read the file deck line by line
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(
+                Objects.requireNonNull(Deck.class.getResourceAsStream("/input.txt"))
+        ))) {
 
             String line;
 
+
+            //Validation check if the file deck is valid or invalid
             while ((line = reader.readLine()) != null) {
                 StringTokenizer tokenizer =
                         new StringTokenizer(line, " \t,");
@@ -71,23 +77,12 @@ public class Deck {
         }
     }
 
-    public Deck(){
+    public Deck() {
         cards = new ArrayList<>();
     }
-    public void addCard(Card card){
-        if (card != null){
-            cards.add(card);
-        }
-    }
-    public int getCardsCount(){
-        return cards.size();
-    }
 
-    public List<Card> getCards(){
-        return new  ArrayList<>(cards);
-    }
 
-    public void shuffle(){
+    public void shuffle() {
         int middle = cards.size() / 2;
 
         List<Card> firstHalf = new ArrayList<>(
@@ -100,7 +95,7 @@ public class Deck {
 
         List<Card> shuffledCards = new ArrayList<>();
 
-        for (int i = 0; i < middle; i++){
+        for (int i = 0; i < middle; i++) {
             shuffledCards.add(firstHalf.get(i));
             shuffledCards.add(secondHalf.get(i));
         }
@@ -109,25 +104,25 @@ public class Deck {
         cards.addAll(shuffledCards);
     }
 
-    public void shuffleMultipleTimes(int shuffleCount){
-        if  (shuffleCount < 0){
+    public void shuffleMultipleTimes(int shuffleCount) {
+        if (shuffleCount < 0) {
             System.out.println("Shuffle count cannot be negative.");
             return;
         }
 
-        for (int count = 0; count < shuffleCount % 8; count++){
-                shuffle();
+        for (int count = 0; count < shuffleCount % 8; count++) {
+            shuffle();
         }
     }
 
-    public void distributeCards(List<Player> players){
-        if(players.isEmpty()){
+    public void distributeCards(List<Player> players) {
+        if (players.isEmpty()) {
             System.out.println("There are no players to receive cards");
             return;
         }
         int playerIndex = 0;
 
-        for(Card card : cards) {
+        for (Card card : cards) {
             players.get(playerIndex).addToBottom(card);
 
             playerIndex++;
@@ -138,6 +133,7 @@ public class Deck {
         }
         cards.clear();
     }
+
     public void displayDeck(String title) {
         System.out.println("\n" + title);
 
