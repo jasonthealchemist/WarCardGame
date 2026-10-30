@@ -83,6 +83,7 @@ public class Deck {
 
 
     public void shuffle() {
+        // Perfect shuffle, cut the deck in half
         int middle = cards.size() / 2;
 
         List<Card> firstHalf = new ArrayList<>(
@@ -105,12 +106,12 @@ public class Deck {
     }
 
     public void shuffleMultipleTimes(int shuffleCount) {
-        if (shuffleCount < 0) {
-            System.out.println("Shuffle count cannot be negative.");
+
+        if (shuffleCount < 1 || shuffleCount > 100) {
+            System.out.println("Error: Shuffle count must be between 1 and 100.");
             return;
         }
-
-        for (int count = 0; count < shuffleCount % 8; count++) {
+        for (int count = 0; count < shuffleCount; count++) {
             shuffle();
         }
     }

@@ -156,22 +156,20 @@ public class GameSetup {
 
     private int getshuffleDeck(){
         while(true){
-            System.out.print("Enter number of shuffles: ");
+            System.out.print("Enter number of shuffles between (1-100): ");
             String input = scanner.nextLine().trim();
 
-            try{
-                int getshuffleDeck = Integer.parseInt(input);
+            try {
+                int shuffleCount = Integer.parseInt(input);
 
-                if(getshuffleDeck >= 0){
-                    return getshuffleDeck;
+                if (shuffleCount >= 1 && shuffleCount <= 100) {
+                    return shuffleCount;
                 }
-                System.out.println(
-                        "Shuffle Count cannot be negative."
-                );
-            }catch (NumberFormatException e){
-                System.out.println(
-                        "Please enter a whole number"
-                );
+
+                System.out.println("Error: Shuffle count must be between 1 and 100.");
+
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Please enter a valid whole number.");
             }
         }
     }
