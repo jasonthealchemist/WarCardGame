@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Deque;
 
+import static com.svi.warcardgame.models.Deck.CARDS_PER_ROW;
+
 
 public class Player {
     private final int playerNo;
@@ -60,7 +62,7 @@ public class Player {
         for (Card card : cards) {
             System.out.print(card + " ");
 
-            if (cardNumber % 13 == 0) {
+            if (cardNumber % CARDS_PER_ROW == 0) {
                 System.out.println();
             }
 

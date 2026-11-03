@@ -4,13 +4,12 @@ import com.svi.warcardgame.enums.Ranks;
 import com.svi.warcardgame.enums.Suits;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
 /**
- * The Deck class is responsible for loading and validating the deck from file, shuffling, input shuffling times and distributing cards to the players.
+ * The Deck class is responsible for loading and validating the deck from file, shuffling, input shuffling times and roundrobin distribution to the players.
  */
 
 public class Deck {
@@ -18,6 +17,12 @@ public class Deck {
 
     public static final int DECK_SIZE =
             Ranks.values().length * Suits.values().length;
+
+    // Gets the length of the cards_per_row to display in rows
+    public static final int CARDS_PER_ROW = Ranks.values().length;
+
+    public static final int MIN_SHUFFLES = 1;
+    public static final int MAX_SHUFFLES = 100;
 
     public boolean loadFromFile(String fileName) {
         List<Card> loadedCards = new ArrayList<>();
@@ -95,8 +100,8 @@ public class Deck {
     }
 
 
+    // Perfect shuffle, cuts the deck in half and distribute the card in roundrobin
     public void shuffle() {
-        // Perfect shuffle, cut the deck in half
         int middle = cards.size() / 2;
 
         List<Card> firstHalf = new ArrayList<>(
@@ -118,16 +123,18 @@ public class Deck {
         cards.addAll(shuffledCards);
     }
 
+    // Handles the shufflingTimes
     public void shuffleMultipleTimes(int shuffleCount) {
 
-        if (shuffleCount < 1 || shuffleCount > 100) {
-            System.out.println("Error: Shuffle count must be between 1 and 100.");
+        if (shuffleCount < MIN_SHUFFLES || shuffleCount > MAX_SHUFFLES) {
+            System.out.println("Error: Shuffle count must be between " + MIN_SHUFFLES + " and " +  MAX_SHUFFLES + ".");
             return;
         }
         for (int count = 0; count < shuffleCount; count++) {
             shuffle();
         }
     }
+
 
     public void distributeCards(List<Player> players) {
         if (players.isEmpty()) {
@@ -157,7 +164,7 @@ public class Deck {
             System.out.print(card + " ");
             cardCount++;
 
-            if (cardCount % 13 == 0) {
+            if (cardCount % CARDS_PER_ROW == 0) {
                 System.out.println();
             }
         }

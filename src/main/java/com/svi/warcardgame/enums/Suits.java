@@ -16,7 +16,7 @@ public enum Suits {
         this.value = value;
     }
 
-    // public char getSymbol() {return symbol;}
+    public char getSymbol() {return symbol;}
     public int getValue() {return value;}
 
 

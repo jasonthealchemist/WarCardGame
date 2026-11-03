@@ -4,19 +4,22 @@ import com.svi.warcardgame.enums.Ranks;
 import com.svi.warcardgame.enums.Suits;
 import com.svi.warcardgame.models.Deck;
 import com.svi.warcardgame.models.Player;
+import com.svi.warcardgame.utils.ConsoleColors;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.svi.warcardgame.models.Deck.MIN_SHUFFLES;
+
+/*
+* GameSetup class, responsible for the game settings and setup, it handles the input of g
+*
+ */
+
 public class GameSetup {
     private static final int MIN_PLAYERS = 2;
     private static final int MAX_PLAYERS = 8;
-
-
-    //colors
-    private static final String RESET = "\u001B[0m";
-    private static final String GOLD = "\u001B[33m";
 
     private final Scanner scanner;
 
@@ -119,7 +122,7 @@ public class GameSetup {
         Player winner = game.playGame(players, Deck.DECK_SIZE);
 
         if(winner != null){
-            System.out.println(GOLD + "★ Game Winner: Player " + winner.getPlayerNo() + " ★"+ RESET);
+            System.out.println(ConsoleColors.GOLD + "★ Game Winner: Player " + winner.getPlayerNo() + " ★"+ ConsoleColors.RESET);
             System.out.println(" ");
         }
         return true;
@@ -137,7 +140,7 @@ public class GameSetup {
                     return num_of_players;
                 }
                 System.out.println(
-                        "Number of players must be between 2 and 8 to start playing."
+                        "Number of players must be between " + MIN_PLAYERS  + " and " + MAX_PLAYERS + " to start playing."
                 );
             }catch (NumberFormatException e){
                 System.out.println(
@@ -158,17 +161,17 @@ public class GameSetup {
 
     private int getshuffleDeck(){
         while(true){
-            System.out.print("Enter number of shuffles between (1-100): ");
+            System.out.print("Enter number of shuffles between " + MIN_SHUFFLES + " and " + Deck.MAX_SHUFFLES + ": ");
             String input = scanner.nextLine().trim();
 
             try {
                 int shuffleCount = Integer.parseInt(input);
 
-                if (shuffleCount >= 1 && shuffleCount <= 100) {
+                if (shuffleCount >= Deck.MIN_SHUFFLES && shuffleCount <= Deck.MAX_SHUFFLES) {
                     return shuffleCount;
                 }
 
-                System.out.println("Error: Shuffle count must be between 1 and 100.");
+                System.out.println("Error: Shuffle count must be between " + Deck.MIN_SHUFFLES + " and " + Deck.MAX_SHUFFLES + ".");
 
             } catch (NumberFormatException e) {
                 System.out.println("Error: Please enter a valid whole number.");

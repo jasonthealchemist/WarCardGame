@@ -3,9 +3,15 @@ package com.svi.warcardgame.models;
 import com.svi.warcardgame.enums.Ranks;
 import com.svi.warcardgame.enums.Suits;
 
+
+/*
+*
+* */
 public class Card {
     private final Ranks rank;
     private final Suits suit;
+    private static final String SYMBOL_SEPARATOR = "-";
+    private static final String DISPLAY_SEPARATOR = " ";
 
 
     public Card(Ranks rank, Suits suit) {
@@ -35,7 +41,8 @@ public class Card {
 
     @Override
     public String toString() {
-        return  suit.getDisplaySymbol() + "-" + rank.getSymbol();
+        return suit.getDisplaySymbol() + suit.getSymbol() + SYMBOL_SEPARATOR + rank.getSymbol()
+                + DISPLAY_SEPARATOR;
     }
 
     public String toDisplayString(){

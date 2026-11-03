@@ -12,8 +12,6 @@ import java.util.List;
 public class WarCardGame {
     private static final String RESET = "\u001B[0m";
     private static final String GOLD = "\u001B[33m";
-    public static final int DECK_SIZE =
-            Ranks.values().length * Suits.values().length;
 
     public Player playGame(List<Player> players, int totalCards) {
         List<Player> activePlayers = new ArrayList<>();
