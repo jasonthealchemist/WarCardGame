@@ -5,13 +5,17 @@ import com.svi.warcardgame.enums.Ranks;
 import com.svi.warcardgame.enums.Suits;
 import com.svi.warcardgame.models.Card;
 import com.svi.warcardgame.models.Player;
+import com.svi.warcardgame.utils.ConsoleColors;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.svi.warcardgame.utils.ConsoleColors.RESET;
+
+/*
+* Handles the game rounds, findWinningIndex, round results, displayCollected Cards and remove eliminated players.
+* */
 public class WarCardGame {
-    private static final String RESET = "\u001B[0m";
-    private static final String GOLD = "\u001B[33m";
 
     public Player playGame(List<Player> players, int totalCards) {
         List<Player> activePlayers = new ArrayList<>();
@@ -115,10 +119,10 @@ public class WarCardGame {
             Card playedCard = tableCards.get(index);
 
             if (playedCard == winningCard) {
-                System.out.println(GOLD + "★ WINNER: Player "
+                System.out.println(ConsoleColors.GOLD + "★ WINNER: Player "
                         + player.getPlayerNo()
                         + ": " + playedCard.toDisplayString()
-                        + " ★" + RESET);
+                        + " ★" + ConsoleColors.RESET);
             } else {
                 System.out.println("Player "
                         + player.getPlayerNo()

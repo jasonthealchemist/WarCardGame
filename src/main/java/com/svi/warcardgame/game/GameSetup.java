@@ -13,7 +13,7 @@ import java.util.Scanner;
 import static com.svi.warcardgame.models.Deck.MIN_SHUFFLES;
 
 /*
-* GameSetup class, responsible for the game settings and setup, it handles the input of g
+* GameSetup class, responsible for the game settings and setup, handles the number of players
 *
  */
 
@@ -53,7 +53,6 @@ public class GameSetup {
         while(true){
             System.out.print("Are you sure you want to quit? (Y/N): ");
             String answer = scanner.nextLine().trim();
-
 
             if(answer.equalsIgnoreCase("Y") ||  answer.equalsIgnoreCase("YES")){
                 return true;
