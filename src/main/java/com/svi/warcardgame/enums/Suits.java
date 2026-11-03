@@ -6,6 +6,7 @@ public enum Suits {
     SPADE('S', 2),
     CLUBS('C', 1);
 
+    private static final int SYMBOL_LENGTH = 1;
     private final char symbol;
     private final int value;
 
@@ -15,12 +16,12 @@ public enum Suits {
         this.value = value;
     }
 
-    public char getSymbol() {return symbol;}
+    // public char getSymbol() {return symbol;}
     public int getValue() {return value;}
 
 
     public static Suits fromSymbol(String text) {
-        if(text == null){
+        if(text == null || text.length() != SYMBOL_LENGTH){
             throw new IllegalArgumentException("Suit symbol cannot be null");
         }
         for (Suits suit : values()) {

@@ -1,5 +1,7 @@
 package com.svi.warcardgame.game;
 
+import com.svi.warcardgame.enums.Ranks;
+import com.svi.warcardgame.enums.Suits;
 import com.svi.warcardgame.models.Deck;
 import com.svi.warcardgame.models.Player;
 
@@ -10,7 +12,7 @@ import java.util.Scanner;
 public class GameSetup {
     private static final int MIN_PLAYERS = 2;
     private static final int MAX_PLAYERS = 8;
-    private static final int TOTAL_CARDS = 52;
+
 
     //colors
     private static final String RESET = "\u001B[0m";
@@ -114,7 +116,7 @@ public class GameSetup {
 
         WarCardGame game = new WarCardGame();
 
-        Player winner = game.playGame(players, TOTAL_CARDS);
+        Player winner = game.playGame(players, Deck.DECK_SIZE);
 
         if(winner != null){
             System.out.println(GOLD + "★ Game Winner: Player " + winner.getPlayerNo() + " ★"+ RESET);

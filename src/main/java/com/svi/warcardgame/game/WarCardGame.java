@@ -1,6 +1,8 @@
 
 package com.svi.warcardgame.game;
 
+import com.svi.warcardgame.enums.Ranks;
+import com.svi.warcardgame.enums.Suits;
 import com.svi.warcardgame.models.Card;
 import com.svi.warcardgame.models.Player;
 
@@ -9,10 +11,9 @@ import java.util.List;
 
 public class WarCardGame {
     private static final String RESET = "\u001B[0m";
-    private static final String RED = "\u001B[31m";
     private static final String GOLD = "\u001B[33m";
-    private static final String CYAN = "\u001B[36m";
-    private static final String GREEN = "\u001B[32m";
+    public static final int DECK_SIZE =
+            Ranks.values().length * Suits.values().length;
 
     public Player playGame(List<Player> players, int totalCards) {
         List<Player> activePlayers = new ArrayList<>();
@@ -35,10 +36,9 @@ public class WarCardGame {
 
             playRound(activePlayers, playersInRound, tableCards);
 
-            Card winningCard = findWinningCard(tableCards);
-            Player roundWinner = findRoundWinner(
-                    playersInRound, tableCards, winningCard
-            );
+            int winningIndex = findWinningIndex(tableCards);
+            Card winningCard = tableCards.get(winningIndex);
+            Player roundWinner = playersInRound.get(winningIndex);
 
             displayRoundResults(
                     playersInRound, tableCards, roundWinner, winningCard
@@ -93,32 +93,15 @@ public class WarCardGame {
         }
     }
 
-    private Card findWinningCard(List<Card> tableCards) {
-        Card winningCard = tableCards.get(0);
+    private int findWinningIndex(List<Card> tableCards){
+        int winningIndex = 0;
 
-        for (int index = 1; index < tableCards.size(); index++) {
-            Card currentCard = tableCards.get(index);
-
-            if (Card.compareCard(currentCard, winningCard) > 0) {
-                winningCard = currentCard;
+        for(int index = 1; index < tableCards.size(); index++){
+            if(Card.compareCard(tableCards.get(index), tableCards.get(winningIndex)) > 0){
+                winningIndex = index;
             }
         }
-
-        return winningCard;
-    }
-
-    private Player findRoundWinner(
-            List<Player> playersInRound,
-            List<Card> tableCards,
-            Card winningCard) {
-
-        for (int index = 0; index < tableCards.size(); index++) {
-            if (tableCards.get(index) == winningCard) {
-                return playersInRound.get(index);
-            }
-        }
-
-        return null;
+        return winningIndex;
     }
 
     private void displayRoundResults(

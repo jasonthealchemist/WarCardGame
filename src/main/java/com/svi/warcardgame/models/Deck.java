@@ -9,15 +9,24 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
 
+/**
+ * The Deck class is responsible for loading and validating the deck from file, shuffling, input shuffling times and distributing cards to the players.
+ */
+
 public class Deck {
     private final List<Card> cards;
+
+    public static final int DECK_SIZE =
+            Ranks.values().length * Suits.values().length;
 
     public boolean loadFromFile(String fileName) {
         List<Card> loadedCards = new ArrayList<>();
         Set<String> uniqueCards = new HashSet<>();
 
 
-        // Read the file using BufferedReader to read the file deck line by line
+        /*
+        * Read the file using BufferedReader to read the file deck line by line,
+        * */
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(
                 Objects.requireNonNull(Deck.class.getResourceAsStream("/input.txt"))
         ))) {
@@ -25,7 +34,7 @@ public class Deck {
             String line;
 
 
-            //Validation check if the file deck is valid or invalid
+            // Validation check if the file deck is valid or invalid.
             while ((line = reader.readLine()) != null) {
                 StringTokenizer tokenizer =
                         new StringTokenizer(line, " \t,");
@@ -40,12 +49,15 @@ public class Deck {
                         return false;
                     }
 
-                    Suits suit = Suits.fromSymbol(parts[0]);
-                    Ranks rank = Ranks.fromSymbol(parts[1]);
+                    Suits suit;
+                    Ranks rank;
 
-                    if (suit == null || rank == null) {
-                        System.out.println(
-                                "Error: Invalid card: " + cardCode);
+                    try{
+                        suit = Suits.fromSymbol(parts[0]);
+                        rank = Ranks.fromSymbol(parts[1]);
+
+                    }catch (IllegalArgumentException e) {
+                        System.out.println("Error: Invalid card: " + cardCode);
                         return false;
                     }
 
@@ -77,6 +89,7 @@ public class Deck {
         }
     }
 
+    // create new card ArrayList
     public Deck() {
         cards = new ArrayList<>();
     }
