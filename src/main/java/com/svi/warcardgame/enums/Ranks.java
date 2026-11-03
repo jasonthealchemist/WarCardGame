@@ -1,5 +1,6 @@
 package com.svi.warcardgame.enums;
 
+// Handles the rank enums
 public enum Ranks {
     ACE("A", 14),
     KING("K", 13),
@@ -25,6 +26,7 @@ public enum Ranks {
 
     public String getSymbol() {return symbol;}
     public int getValue() {return this.value;}
+
 
     public static Ranks fromSymbol(String text) {
         if (text == null){

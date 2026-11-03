@@ -1,5 +1,6 @@
 package com.svi.warcardgame.enums;
 
+// Handles enum suits
 public enum Suits {
     DIAMOND('D', 4),
     HEART('H', 3),
@@ -16,9 +17,13 @@ public enum Suits {
         this.value = value;
     }
 
-    public char getSymbol() {return symbol;}
-    public int getValue() {return value;}
+    public char getSymbol() {
+        return symbol;
+    }
 
+    public int getValue() {
+        return value;
+    }
 
     public static Suits fromSymbol(String text) {
         if(text == null || text.length() != SYMBOL_LENGTH){
