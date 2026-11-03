@@ -2,7 +2,6 @@ package com.svi.warcardgame.models;
 
 import com.svi.warcardgame.enums.Ranks;
 import com.svi.warcardgame.enums.Suits;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

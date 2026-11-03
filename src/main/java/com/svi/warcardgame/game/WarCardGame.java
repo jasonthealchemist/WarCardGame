@@ -95,7 +95,7 @@ public class WarCardGame {
         int winningIndex = 0;
 
         for(int index = 1; index < tableCards.size(); index++){
-            if(Card.compareCard(tableCards.get(index), tableCards.get(winningIndex)) > 0){
+            if((tableCards.get(index).compareTo(tableCards.get(winningIndex))) > 0){
                 winningIndex = index;
             }
         }

@@ -1,7 +1,6 @@
 package com.svi.warcardgame.models;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Deque;
 
@@ -20,10 +19,6 @@ public class Player {
     public int getPlayerNo() {
         return playerNo;
     }
-
-    /*public int getCardCount(){
-        return cards.size();
-    } */
 
     public boolean hasCards(){
         return !cards.isEmpty();
