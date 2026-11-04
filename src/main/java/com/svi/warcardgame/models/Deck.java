@@ -27,7 +27,6 @@ public class Deck {
         List<Card> loadedCards = new ArrayList<>();
         Set<String> uniqueCards = new HashSet<>();
 
-
         /*
         * Read the file using BufferedReader to read the file deck line by line,
         * */
@@ -43,6 +42,7 @@ public class Deck {
                 StringTokenizer tokenizer =
                         new StringTokenizer(line, " \t,");
 
+                // check if another card exists and retrives the next card
                 while (tokenizer.hasMoreTokens()) {
                     String cardCode = tokenizer.nextToken();
                     String[] parts = cardCode.split("-", -1);
@@ -75,11 +75,12 @@ public class Deck {
                 }
             }
 
-            if (loadedCards.size() != 52) {
+            if (loadedCards.size() != DECK_SIZE) {
                 System.out.println(
                         "Error: The deck must contain exactly 52 cards.");
                 return false;
             }
+
 
             cards.clear();
             cards.addAll(loadedCards);

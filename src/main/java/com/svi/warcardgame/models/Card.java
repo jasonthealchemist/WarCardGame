@@ -7,9 +7,8 @@ import com.svi.warcardgame.enums.Suits;
 /*
 * Handles the comparison method and display of the cards.
 *
-* Uses interface and polymorphism Comparable to provide compareTo inside the Card class not in the game loop.
 * */
-public class Card  implements Comparable<Card>{
+public class Card{
     private final Ranks rank;
     private final Suits suit;
     private static final String SYMBOL_SEPARATOR = "-";
@@ -21,11 +20,14 @@ public class Card  implements Comparable<Card>{
         this.suit = suit;
     }
 
-    @Override
-    public int compareTo(Card other){
 
-        int rankComparison = Integer.compare(rank.getValue(),
-                other.rank.getValue());
+    public Ranks getRank() {return rank;}
+    public Suits getSuit() {return suit;}
+
+    public static int compareCard(Card a, Card b){
+
+        int rankComparison = Integer.compare(a.getRank().getValue(),
+                b.getRank().getValue());
 
 
         if (rankComparison != 0){
@@ -33,8 +35,8 @@ public class Card  implements Comparable<Card>{
         }
 
         return Integer.compare(
-                suit.getValue(),
-                suit.getValue()
+                a.getSuit().getValue(),
+                b.getSuit().getValue()
         );
     }
 
