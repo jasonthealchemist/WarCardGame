@@ -2,6 +2,8 @@ package com.svi.warcardgame.models;
 
 import com.svi.warcardgame.enums.Ranks;
 import com.svi.warcardgame.enums.Suits;
+import com.svi.warcardgame.utils.CardPrinter;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,9 +18,6 @@ public class Deck {
 
     public static final int DECK_SIZE =
             Ranks.values().length * Suits.values().length;
-
-    // Gets the length of the cards_per_row to display in rows
-    public static final int CARDS_PER_ROW = Ranks.values().length;
 
     public static final int MIN_SHUFFLES = 1;
     public static final int MAX_SHUFFLES = 100;
@@ -154,22 +153,9 @@ public class Deck {
         }
         cards.clear();
     }
-
     public void displayDeck(String title) {
         System.out.println("\n" + title);
-
-        int cardCount = 0;
-
-        for (Card card : cards) {
-            System.out.print(card + " ");
-            cardCount++;
-
-            if (cardCount % CARDS_PER_ROW == 0) {
-                System.out.println();
-            }
-        }
-
-        System.out.println();
+        CardPrinter.printCards(cards);
     }
 }
 

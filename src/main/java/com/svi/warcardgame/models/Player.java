@@ -1,11 +1,10 @@
 package com.svi.warcardgame.models;
 
+import com.svi.warcardgame.utils.CardPrinter;
+
 import java.util.ArrayDeque;
 import java.util.List;
 import java.util.Deque;
-
-import static com.svi.warcardgame.models.Deck.CARDS_PER_ROW;
-
 
 public class Player {
     private final int playerNo;
@@ -52,18 +51,6 @@ public class Player {
     }
 
     public void displayDeck() {
-        int cardNumber = 1;
-
-        for (Card card : cards) {
-            System.out.print(card + " ");
-
-            if (cardNumber % CARDS_PER_ROW == 0) {
-                System.out.println();
-            }
-
-            cardNumber++;
-        }
-
-        System.out.println();
+        CardPrinter.printCards(cards);
     }
 }
