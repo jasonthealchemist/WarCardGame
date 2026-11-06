@@ -47,6 +47,6 @@ public class Card{
     }
 
     public String toDisplayString(){
-        return suit.getDisplaySymbol() + "-" + rank.getSymbol();
+        return suit.getDisplaySymbol() + suit.getSymbol() + "-" + rank.getSymbol();
     }
 }
