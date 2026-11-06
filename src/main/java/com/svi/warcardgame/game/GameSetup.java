@@ -13,7 +13,7 @@ import java.util.Scanner;
 import static com.svi.warcardgame.models.Deck.MIN_SHUFFLES;
 
 /*
-* GameSetup class, responsible for the game settings and setup, handles the number of players
+* GameSetup class is responsible for the game settings and setup, handles the number of players, create players, get the number of shuffles.
 *
  */
 

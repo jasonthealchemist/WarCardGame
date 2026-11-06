@@ -6,6 +6,10 @@ import java.util.ArrayDeque;
 import java.util.List;
 import java.util.Deque;
 
+/*
+* Handles the playerNo and the cards of players using Deque
+* */
+
 public class Player {
     private final int playerNo;
     private final Deque<Card> cards;

@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 
 /**
- * The Deck class is responsible for loading and validating the deck from file, shuffling, input shuffling times and roundrobin distribution to the players.
+ * The Deck class is responsible for loading, validating the deck from file, shuffling, input shuffling times and round robin distribution to the players.
  */
 
 public class Deck {

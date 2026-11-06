@@ -13,8 +13,8 @@ import java.util.List;
 import static com.svi.warcardgame.utils.ConsoleColors.RESET;
 
 /*
-* Handles the game rounds, findWinningIndex, round results, displayCollected Cards and remove eliminated players.
-* */
+*  Handles the game rounds, findWinningIndex, round results, displayCollected Cards and remove eliminated players.
+*/
 public class WarCardGame {
 
     public Player playGame(List<Player> players, int totalCards) {
@@ -134,9 +134,7 @@ public class WarCardGame {
                 + roundWinner.getPlayerNo());
     }
 
-    private void displayCollectedCards(
-            List<Card> tableCards,
-            Card winningCard) {
+    private void displayCollectedCards(List<Card> tableCards, Card winningCard) {
 
         System.out.println("\nCards collected:");
         System.out.println("Winning card: " + winningCard);
